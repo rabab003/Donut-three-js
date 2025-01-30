@@ -9,17 +9,27 @@
 }
 
 
+
+
 html{
     scroll-snap-type:y mandatory;
 }
 
 body{
-    background: #ffc0cb;
+    background:rgb(135, 109, 113);
     position: relative;
     height: 100%;
     /* overflow: hidden; */
     font-family: 'Poppins', sans-serif;
 }
+
+.webgl {
+    position: fixed;
+    top: 0;
+    left: 0;
+    outline: none;
+}
+
 
 section {
     height: 100vh;
