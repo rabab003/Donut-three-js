@@ -29,6 +29,15 @@ const camera = new THREE.perspectiveCamera(35, sizes.width / sizes.height, 0.1, 
 camera.position.z = 5 
 scene.add(camera)
 
+// light
+const ambientLight = new THREE.ambientLight(0xfffff, 0.8)
+scene.add(ambientLight)
+
+const directionLight = new THREE.DirectionakKight(0xfffff, 1)
+directionLight.position.set(1,2,0)
+
+scene.add(directionLight)
+
 
 // renderer
 
@@ -42,3 +51,9 @@ renderer.setSize(size)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
 renderer.render(screen, camera)
+
+
+// animate
+
+const Clock = new THREE.Clock()
+let lastElap = 
