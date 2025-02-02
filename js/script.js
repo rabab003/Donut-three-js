@@ -17,6 +17,18 @@ const cube = new THREE.Mesh(
 )
 
 scene.add(cube)
+
+
+const gtlfLoader = new THREE.GLTFLoader()
+
+gtlfLoader.load(
+    './assets/donut/scene.gltf',
+    (gltf) => {
+        console.log(gltf);
+        scene.add(gltf.scene)
+    })
+
+
 // sizes
 const sizes ={
     width: window.innerWidth,
@@ -47,7 +59,7 @@ const renderer = new THREE.WebGLRenderer({
     alpha:true,
 })
 
-renderer.setSize(size)
+renderer.setSize(sizes)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
 renderer.render(screen, camera)
@@ -56,4 +68,15 @@ renderer.render(screen, camera)
 // animate
 
 const Clock = new THREE.Clock()
-let lastElap = 
+let lastElapsedTime = 0 
+
+const tick = () => {
+    const elapsedTime = clock.getElapseTime()
+    const deltaTime = elapsedTime - lastElapsedTime
+
+    lastElapsedTime= elapsedTime
+    cube.rotation.y = Math.sin(elapsedTime)
+    renderer.render(scene, camera)
+}
+
+tick()
