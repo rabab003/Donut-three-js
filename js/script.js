@@ -18,15 +18,23 @@ const cube = new THREE.Mesh(
 
 scene.add(cube)
 
+// GLTF LOADER
+let donut = null;
 
-const gtlfLoader = new THREE.GLTFLoader()
+const gtlfLoader = new THREE.GLTFLoader();
 
 gtlfLoader.load(
     './assets/donut/scene.gltf',
     (gltf) => {
-        console.log(gltf);
-        scene.add(gltf.scene)
-    })
+        donut = gltf.scene;
+        donut.position.x = 1.5 
+        donut.rotation.x = Math.PI * 0.2 
+        donut.rotation.z =Math.PI * 0.15 
+
+        const radius = 8.5
+        donut.scale.set(radius, radius, radius)
+        scene.add(donut)
+})
 
 
 // sizes
