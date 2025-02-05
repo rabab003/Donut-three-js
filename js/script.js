@@ -6,17 +6,7 @@ const canvas = document.querySelector('canvas.webgl');
 // scene
 const scene = new THREE.Scene()
 
-// test cube
-const cubeGeometry = new THREE.BoxGeometry(1,1,1,1);
-const cubeMaterial = new THREE.MeshBasicMaterial({
-    color : 0xff0000
-})
 
-const cube = new THREE.Mesh(
-    cubeGeometry, cubeMaterial
-)
-
-scene.add(cube)
 
 // GLTF LOADER
 let donut = null;
@@ -36,6 +26,29 @@ gtlfLoader.load(
         scene.add(donut)
 })
 
+
+// scroll
+const transformDonut = [
+    {
+        rotationZ: 0.45,
+        positionX:1.5
+    }, {
+        rotationZ: -0.45,
+        positionX: -1.5
+    },{
+        rotationZ: 0.0314,
+        positionX: 0
+    }
+]
+
+let scrollY = window.scrollY 
+let currenSection = 0
+
+window.addEventListener('scroll', ()=>{
+    scrollY = window.scrollY
+    const newSection = Math.random(scrollY/ sizes.height)
+    console.log(newSection)
+})
 
 // sizes
 const sizes ={
@@ -80,6 +93,11 @@ let lastElapsedTime = 0
 const tick = () => {
     const elapsedTime = clock.getElapseTime()
     const deltaTime = elapsedTime - lastElapsedTime
+    lastElapsedTime = elapsedTime
+
+    if (!!donut){
+        donut.position.y = Math.sin(elapsedTime * 0.5) * 0.1 - 0.1
+    }
 
     lastElapsedTime= elapsedTime
     cube.rotation.y = Math.sin(elapsedTime)
